@@ -2,12 +2,41 @@
 
 [ext_resource type="Script" uid="uid://pguvqdknoy0x" path="res://asteroid/asteroid.gd" id="1_da5kf"]
 
+[sub_resource type="Shader" id="Shader_da5kf"]
+code = "shader_type canvas_item;
+
+uniform float min_y;
+uniform float max_y;
+uniform float progress: hint_range(0.0, 1.0);
+
+varying vec2 local_pos;
+
+void vertex() {
+	local_pos = VERTEX;
+}
+
+void fragment() {
+	float threshold = mix(max_y, min_y, progress);
+	if (local_pos.y < threshold) {
+		discard;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkysg"]
+resource_local_to_scene = true
+shader = SubResource("Shader_da5kf")
+shader_parameter/min_y = 0.0
+shader_parameter/max_y = 0.0
+shader_parameter/progress = 0.0
+
 [node name="Asteroid" type="Area2D" unique_id=378102197]
 script = ExtResource("1_da5kf")
 
 [node name="Shape" type="Polygon2D" parent="." unique_id=1857766677]
 
 [node name="FillShape" type="Polygon2D" parent="." unique_id=2000045154]
+material = SubResource("ShaderMaterial_kkysg")
 
 [node name="Outline" type="Line2D" parent="." unique_id=313961372]
 

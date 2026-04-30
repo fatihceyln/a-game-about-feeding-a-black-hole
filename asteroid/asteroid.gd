@@ -28,6 +28,10 @@ var orbit_radius: float = 0.0
 var orbit_angle: float = 0.0
 var orbit_speed: float = randf_range(ORBIT_SPEED_RANGE.x, ORBIT_SPEED_RANGE.y)
 
+var fill_material: ShaderMaterial
+var min_y: float = 0.0
+var max_y: float = 0.0
+
 func _ready() -> void:
 	var points: PackedVector2Array = make_polygon_points()
 	shape.polygon = points
@@ -42,6 +46,12 @@ func _ready() -> void:
 	outline.width = OUTLINE_WIDTH
 
 	collision_polygon.polygon = points
+
+	update_min_max_y()
+	fill_material = fill_shape.material as ShaderMaterial
+	fill_material.set_shader_parameter("min_y", min_y)
+	fill_material.set_shader_parameter("max_y", max_y)
+	fill_material.set_shader_parameter("progress", 0.0)
 
 
 func _process(delta: float) -> void:
@@ -69,8 +79,19 @@ func make_polygon_points() -> PackedVector2Array:
 	return points
 
 
+func update_min_max_y() -> void:
+	min_y = shape.polygon[0].y
+	max_y = shape.polygon[0].y
+
+	for point: Vector2 in shape.polygon:
+		if point.y < min_y:
+			min_y = point.y
+		if point.y > max_y:
+			max_y = point.y
+
+
 func take_damage() -> void:
 	health -= 1
-	print("damage taken, current health: ", health)
+	fill_material.set_shader_parameter("progress", 1 - (float(health) / float(MAX_HEALTH)))
 	if health <= 0:
 		queue_free()
