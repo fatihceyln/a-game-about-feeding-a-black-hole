@@ -26,3 +26,9 @@ func _draw() -> void:
 		var start_angle: float = angle_offset + (float(i) * segment_size)
 		var end_angle: float = start_angle + (segment_size * SEGMENT_RATIO)
 		draw_arc(Vector2.ZERO, RADIUS, start_angle, end_angle, 20, Color.BLACK, 6)		
+
+
+func play_hit_animation() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
