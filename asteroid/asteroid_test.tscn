@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://sjdv70wlan0w"]
+
+[ext_resource type="PackedScene" uid="uid://db1ixbef0ki6" path="res://asteroid/asteroid.tscn" id="1_p6g8c"]
+
+[node name="AsteroidTest" type="Node2D" unique_id=1722473928]
+
+[node name="Asteroid" parent="." unique_id=378102197 instance=ExtResource("1_p6g8c")]
+position = Vector2(560, 273)
+size = 40.0
