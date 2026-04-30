@@ -6,9 +6,10 @@ const SEGMENT_COUNT: int = 12
 const SEGMENT_RATIO: float = 0.7
 const SPEED: float = 0.6
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 var angle_offset: float = 0.0
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
 	var circle: CircleShape2D = collision_shape.shape as CircleShape2D
