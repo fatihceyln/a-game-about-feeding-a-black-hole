@@ -6,4 +6,3 @@
 
 [node name="Asteroid" parent="." unique_id=378102197 instance=ExtResource("1_p6g8c")]
 position = Vector2(560, 273)
-size = 40.0
