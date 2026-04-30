@@ -10,12 +10,17 @@ const OUTLINE_WIDTH: float = 3.0
 
 const ORBIT_SPEED_RANGE: Vector2 = Vector2(0.3, 0.7)
 
+const MAX_HEALTH: int = 3
+
 @export var radius: float = 40.0
 
 @onready var shape: Polygon2D = $Shape
 @onready var outline: Line2D = $Outline
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 
+var health: int = MAX_HEALTH
+
+# Orbit
 var orbit_center: Vector2 = Vector2.ZERO
 var orbit_radius: float = 0.0
 var orbit_angle: float = 0.0
@@ -57,3 +62,10 @@ func make_polygon_points() -> PackedVector2Array:
 		points.append(Vector2.RIGHT.rotated(angle) * new_radius)
 
 	return points
+
+
+func take_damage() -> void:
+	health -= 1
+	print("damage taken, current health: ", health)
+	if health <= 0:
+		queue_free()
