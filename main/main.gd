@@ -7,10 +7,13 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 @export var spawn_radius_range: Vector2 = Vector2(160, 600)
 
 @onready var black_hole: BlackHole = $BlackHole
+@onready var clicker: Clicker = $Clicker
 
 func _ready() -> void:
 	spawn_asteroids()
 
+func _process(delta: float) -> void:
+	clicker.global_position = get_global_mouse_position()
 
 func spawn_asteroids() -> void:
 	for i in asteroid_count:
