@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bkmig4l2lehhe" path="res://clicker/clicker.gd" id="1_4ioso"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ioso"]
+
 [node name="Clicker" type="Area2D" unique_id=862847543]
 script = ExtResource("1_4ioso")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=156954365]
+shape = SubResource("CircleShape2D_4ioso")
