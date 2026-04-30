@@ -7,6 +7,16 @@
 [node name="Main" type="Node2D" unique_id=1174812453]
 script = ExtResource("2_main")
 
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1012387479]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer" unique_id=378750772]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="BlackHole" parent="." unique_id=776193760 instance=ExtResource("1_53q0u")]
 position = Vector2(960, 540)
 
