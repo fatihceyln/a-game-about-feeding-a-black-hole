@@ -8,10 +8,17 @@ const RADIUS_RATIO_RANGE: Vector2 = Vector2(0.85, 1.16)
 const OUTLINE_COLOR: Color = Color(0.595, 0.352, 0.368, 1.0)
 const OUTLINE_WIDTH: float = 3.0
 
+const ORBIT_SPEED_RANGE: Vector2 = Vector2(0.3, 0.7)
+
 @export var radius: float = 40.0
 
 @onready var shape: Polygon2D = $Shape
 @onready var outline: Line2D = $Outline
+
+var orbit_center: Vector2 = Vector2.ZERO
+var orbit_radius: float = 0.0
+var orbit_angle: float = 0.0
+var orbit_speed: float = randf_range(ORBIT_SPEED_RANGE.x, ORBIT_SPEED_RANGE.y)
 
 func _ready() -> void:
 	var points: PackedVector2Array = make_polygon_points()
@@ -22,6 +29,18 @@ func _ready() -> void:
 	outline.default_color = OUTLINE_COLOR
 	outline.closed = true
 	outline.width = OUTLINE_WIDTH
+
+
+func _process(delta: float) -> void:
+	orbit_angle += orbit_speed * delta
+	position = orbit_center + (Vector2.from_angle(orbit_angle) * orbit_radius)
+
+
+func setup_orbit(center: Vector2, distance: float, angle: float) -> void:
+	orbit_center = center
+	orbit_radius = distance
+	orbit_angle = angle
+	position = orbit_center + (Vector2.from_angle(orbit_angle) * orbit_radius)
 
 
 func make_polygon_points() -> PackedVector2Array:
