@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dr365itvm2dy6"]
+
+[ext_resource type="PackedScene" uid="uid://ckya2d6yacuqy" path="res://black_hole/black_hole.tscn" id="1_w2jlf"]
+
+[node name="BlackHoleTest" type="Node2D" unique_id=561595438]
+
+[node name="BlackHole" parent="." unique_id=776193760 instance=ExtResource("1_w2jlf")]
+position = Vector2(591, 323)
