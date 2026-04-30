@@ -14,6 +14,7 @@ const ORBIT_SPEED_RANGE: Vector2 = Vector2(0.3, 0.7)
 
 @onready var shape: Polygon2D = $Shape
 @onready var outline: Line2D = $Outline
+@onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
 
 var orbit_center: Vector2 = Vector2.ZERO
 var orbit_radius: float = 0.0
@@ -29,6 +30,8 @@ func _ready() -> void:
 	outline.default_color = OUTLINE_COLOR
 	outline.closed = true
 	outline.width = OUTLINE_WIDTH
+
+	collision_polygon.polygon = points
 
 
 func _process(delta: float) -> void:
