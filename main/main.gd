@@ -9,6 +9,10 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 @onready var black_hole: BlackHole = $BlackHole
 
 func _ready() -> void:
+	spawn_asteroids()
+
+
+func spawn_asteroids() -> void:
 	for i in asteroid_count:
 		var asteroid: Asteroid = ASTEROID.instantiate()
 		var angle: float = TAU * float(i) / asteroid_count
