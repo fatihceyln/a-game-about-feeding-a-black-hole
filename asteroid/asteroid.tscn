@@ -10,7 +10,7 @@ shader_parameter/min_y = 0.0
 shader_parameter/max_y = 0.0
 shader_parameter/progress = 0.0
 
-[node name="Asteroid" type="Area2D" unique_id=1616397584]
+[node name="Asteroid" type="Area2D" unique_id=1616397584 groups=["asteroids"]]
 monitoring = false
 script = ExtResource("1_da5kf")
 

@@ -58,9 +58,8 @@ func _on_session_timer_timeout() -> void:
 
 
 func clear_asteroids() -> void:
-	for child: Node in get_children():
-		if child is Asteroid:
-			child.queue_free()
+	for node: Node in get_tree().get_nodes_in_group("asteroids"):
+		node.queue_free()
 
 
 func _on_play_again_button_pressed() -> void:
