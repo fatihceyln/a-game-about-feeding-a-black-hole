@@ -29,4 +29,7 @@ func spawn_asteroids() -> void:
 
 
 func _on_clicker_timer_timeout() -> void:
-	print("attack")
+	var overlapping_areas: Array[Area2D] = clicker.get_overlapping_areas()
+	for area: Area2D in overlapping_areas:
+		if area is Asteroid:
+			area.queue_free()
