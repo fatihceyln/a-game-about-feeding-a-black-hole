@@ -34,6 +34,9 @@ monitorable = false
 [node name="ClickerTimer" type="Timer" parent="." unique_id=1581960026]
 wait_time = 0.5
 
+[node name="SessionTimer" type="Timer" parent="." unique_id=868815264]
+wait_time = 0.1
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1317392998]
 
 [node name="StartScreen" type="Control" parent="HUD" unique_id=1739761309]
@@ -110,4 +113,5 @@ theme_override_font_sizes/font_size = 44
 text = "18.5"
 
 [connection signal="timeout" from="ClickerTimer" to="." method="_on_clicker_timer_timeout"]
+[connection signal="timeout" from="SessionTimer" to="." method="_on_session_timer_timeout"]
 [connection signal="pressed" from="HUD/StartScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
