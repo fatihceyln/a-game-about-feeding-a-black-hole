@@ -10,10 +10,14 @@ const OUTLINE_WIDTH: float = 3
 
 const ORBIT_SPEED_RANGE: Vector2 = Vector2(0.3, 0.7)
 
+const MAX_HEALTH: int = 3
+
 @export var radius: float = 40.0
 @onready var shape: Polygon2D = $Shape
 @onready var outline: Line2D = $Outline
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
+
+var health: int = MAX_HEALTH
 
 var orbit_center: Vector2 = Vector2.ZERO
 var orbit_radius: float = 0
@@ -57,3 +61,10 @@ func setup_orbit(center: Vector2, distance: float, angle: float) -> void:
 	orbit_radius = distance
 	orbit_angle = angle
 	position = orbit_center + Vector2.RIGHT.rotated(orbit_angle) * orbit_radius
+
+
+func take_damage() -> void:
+	health -= 1
+	print("dame taken, current health: ", health)
+	if health <= 0:
+		queue_free()
