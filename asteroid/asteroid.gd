@@ -10,6 +10,7 @@ const OUTLINE_COLOR: Color = Color(0.595, 0.352, 0.368, 1.0)
 const OUTLINE_WIDTH: float = 3
 
 const ORBIT_SPEED_RANGE: Vector2 = Vector2(0.3, 0.7)
+const ROTATION_SPEED_RANGE: Vector2 = Vector2(0.5, 1.5)
 
 const MAX_HEALTH: int = 3
 
@@ -30,6 +31,7 @@ var fill_material: ShaderMaterial
 var min_y: float = 0
 var max_y: float = 0
 
+var rotation_speed: float = randf_range(ROTATION_SPEED_RANGE.x, ROTATION_SPEED_RANGE.y)
 
 func _ready() -> void:
 	var points: PackedVector2Array = make_polygon_points()
@@ -56,6 +58,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	orbit_angle += orbit_speed * delta
 	position = orbit_center + Vector2.RIGHT.rotated(orbit_angle) * orbit_radius
+	rotation = wrapf(rotation + (delta * rotation_speed), 0, TAU)
 
 
 func make_polygon_points() -> PackedVector2Array:
