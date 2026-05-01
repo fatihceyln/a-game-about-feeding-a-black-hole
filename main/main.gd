@@ -12,14 +12,11 @@ const ASTEROID: PackedScene = preload("uid://db1ixbef0ki6")
 @onready var clicker_timer: Timer = $ClickerTimer
 @onready var session_timer: Timer = $SessionTimer
 @onready var start_screen: Control = %StartScreen
+@onready var game_over_screen: Control = %GameOverScreen
 @onready var timer_label: Label = %TimerLabel
 
 
 var session_time: float = 0
-
-
-func _ready() -> void:
-	timer_label.visible = false
 
 
 func _process(delta: float) -> void:
@@ -45,19 +42,30 @@ func _on_clicker_timer_timeout() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	timer_label.visible = true
 	start_screen.visible = false
-	spawn_asteroids()
-	clicker_timer.start()
-	
-	session_time = session_duration
-	session_timer.start()
+	start_session()
 
 
 func _on_session_timer_timeout() -> void:
 	session_time -= session_timer.wait_time
 	timer_label.text = "%.1f" % session_time
 	if session_time <= 0:
-		print("game over")
+		timer_label.visible = false
+		game_over_screen.visible = true
 		session_timer.stop()
 		clicker_timer.stop()
+
+
+func _on_play_again_button_pressed() -> void:
+	game_over_screen.visible = false
+	start_session()
+
+
+func start_session() -> void: 
+	timer_label.visible = true
+	
+	spawn_asteroids()
+	clicker_timer.start()
+	
+	session_time = session_duration
+	session_timer.start()

@@ -13,6 +13,7 @@ corner_radius_bottom_left = 16
 
 [node name="Main" type="Node2D" unique_id=1692932168]
 script = ExtResource("1_x58q2")
+session_duration = 5.0
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=501768433]
 layer = -1
@@ -99,6 +100,67 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Start"
 
+[node name="GameOverScreen" type="Control" parent="HUD" unique_id=363187662]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GameOverScreen" unique_id=416204935]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/GameOverScreen" unique_id=1630874129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/GameOverScreen/CenterContainer" unique_id=1709675261]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xwkvk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GameOverScreen/CenterContainer/PanelContainer" unique_id=1728534850]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOverScreen/CenterContainer/PanelContainer/MarginContainer" unique_id=1640930657]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="HUD/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=286787116]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="HUD/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=245420180]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.37981048, 0.37981054, 0.37981048, 1)
+theme_override_font_sizes/font_size = 32
+text = "Press play again button"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="HUD/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=571777070]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Play Again"
+
 [node name="TimerLabelContainer" type="MarginContainer" parent="HUD" unique_id=806566918]
 offset_right = 88.0
 offset_bottom = 74.0
@@ -107,6 +169,7 @@ theme_override_constants/margin_top = 40
 
 [node name="TimerLabel" type="Label" parent="HUD/TimerLabelContainer" unique_id=1044512541]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 44
@@ -115,3 +178,4 @@ text = "18.5"
 [connection signal="timeout" from="ClickerTimer" to="." method="_on_clicker_timer_timeout"]
 [connection signal="timeout" from="SessionTimer" to="." method="_on_session_timer_timeout"]
 [connection signal="pressed" from="HUD/StartScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HUD/GameOverScreen/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
