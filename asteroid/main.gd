@@ -17,6 +17,5 @@ func spawn_asteroids() -> void:
 		var asteroid: Asteroid = ASTEROID.instantiate()
 		var angle: float = TAU * float(i) / float(asteroid_count)
 		var distance: float = randf_range(spawn_radius_range.x, spawn_radius_range.y)
-		asteroid.position = black_hole.position
-		asteroid.position += Vector2.RIGHT.rotated(angle) * distance
 		add_child(asteroid)
+		asteroid.setup_orbit(black_hole.position, distance, angle)
