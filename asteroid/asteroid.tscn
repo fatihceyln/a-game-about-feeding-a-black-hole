@@ -8,6 +8,8 @@ script = ExtResource("1_da5kf")
 
 [node name="Shape" type="Polygon2D" parent="." unique_id=280419289]
 
+[node name="FillShape" type="Polygon2D" parent="." unique_id=1802841559]
+
 [node name="Outline" type="Line2D" parent="." unique_id=1157858394]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1604637679]
