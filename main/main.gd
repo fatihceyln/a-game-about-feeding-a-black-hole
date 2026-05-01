@@ -10,6 +10,12 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 @onready var clicker: Clicker = $Clicker
 @onready var clicker_timer: Timer = $ClickerTimer
 @onready var start_menu: Control = %StartMenu
+@onready var timer_container: HBoxContainer = %TimerContainer
+@onready var timer_label: Label = %TimerLabel
+
+
+func _ready() -> void:
+	timer_container.visible = false
 
 
 func _process(delta: float) -> void:
@@ -36,5 +42,6 @@ func _on_clicker_timer_timeout() -> void:
 
 func _on_start_button_pressed() -> void:
 	start_menu.visible = false
+	timer_container.visible = true
 	spawn_asteroids()
 	clicker_timer.start()
