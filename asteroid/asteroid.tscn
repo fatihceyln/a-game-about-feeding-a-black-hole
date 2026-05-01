@@ -31,6 +31,7 @@ shader_parameter/max_y = 0.0
 shader_parameter/progress = 0.0
 
 [node name="Asteroid" type="Area2D" unique_id=378102197]
+groups = [&"asteroids"]
 script = ExtResource("1_da5kf")
 
 [node name="Shape" type="Polygon2D" parent="." unique_id=1857766677]

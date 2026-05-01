@@ -105,6 +105,74 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Start"
 
+[node name="GameOverMenu" type="Control" parent="HUD" unique_id=2057443238]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/GameOverMenu" unique_id=2102602528]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GameOverMenu" unique_id=240020223]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.5
+offset_top = -90.5
+offset_right = 303.5
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HUD/GameOverMenu/MarginContainer" unique_id=-1840756605]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xwkvk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/GameOverMenu/MarginContainer" unique_id=-1928256572]
+layout_mode = 2
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 34
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/GameOverMenu/MarginContainer/MarginContainer" unique_id=256116280]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOverMenu/MarginContainer/MarginContainer/CenterContainer" unique_id=260772711]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="HUD/GameOverMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=-1397936862]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="HUD/GameOverMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=279728149]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Time's up — feed more next time"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="HUD/GameOverMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=-1569944689]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Play Again"
+
 [node name="TimerContainer" type="HBoxContainer" parent="HUD" unique_id=27868459]
 unique_name_in_owner = true
 offset_left = 40.0
@@ -121,4 +189,5 @@ text = "18.9"
 
 [connection signal="timeout" from="ClickerTimer" to="." method="_on_clicker_timer_timeout"]
 [connection signal="timeout" from="SessionTimer" to="." method="_on_session_timer_timeout"]
-[connection signal="pressed" from="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer/StartButton" to="." method="begin_session"]
+[connection signal="pressed" from="HUD/GameOverMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer/PlayAgainButton" to="." method="begin_session"]
