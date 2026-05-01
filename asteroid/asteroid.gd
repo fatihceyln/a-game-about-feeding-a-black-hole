@@ -98,3 +98,20 @@ func take_damage() -> void:
 	fill_material.set_shader_parameter("progress", 1 - (float(health) / float(MAX_HEALTH)))
 	if health <= 0:
 		queue_free()
+	else:
+		play_hit_animation()
+
+
+func play_hit_animation() -> void:
+	var current_rotation: float = rotation
+	var new_rotation: float = current_rotation + randf_range(deg_to_rad(15), deg_to_rad(60))
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "rotation", new_rotation, 0.1)\
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", Vector2(1.35, 1.35), 0.1)\
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.1)\
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_delay(0.1)
+	tween.tween_property(self, "rotation", current_rotation, 0.1)\
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_delay(0.1)
