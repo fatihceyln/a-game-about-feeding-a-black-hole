@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rmp6037qba4j"]
 
 [ext_resource type="PackedScene" uid="uid://bja4tldd216g0" path="res://black_hole/black_hole.tscn" id="1_hl3t7"]
-[ext_resource type="Script" uid="uid://cv7mwq1ociqwq" path="res://asteroid/main.gd" id="1_x58q2"]
+[ext_resource type="Script" uid="uid://cv7mwq1ociqwq" path="res://main/main.gd" id="1_x58q2"]
 
 [node name="Main" type="Node2D" unique_id=1692932168]
 script = ExtResource("1_x58q2")
