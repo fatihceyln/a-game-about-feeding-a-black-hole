@@ -22,3 +22,8 @@ position = Vector2(960, 540)
 
 [node name="Clicker" parent="." unique_id=2077072518 instance=ExtResource("3_xwkvk")]
 z_index = 1
+
+[node name="ClickerTimer" type="Timer" parent="." unique_id=1581960026]
+wait_time = 0.5
+
+[connection signal="timeout" from="ClickerTimer" to="." method="_on_clicker_timer_timeout"]

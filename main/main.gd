@@ -8,10 +8,12 @@ const ASTEROID: PackedScene = preload("uid://db1ixbef0ki6")
 
 @onready var black_hole: BlackHole = $BlackHole
 @onready var clicker: Clicker = $Clicker
+@onready var clicker_timer: Timer = $ClickerTimer
 
 
 func _ready() -> void:
 	spawn_asteroids()
+	clicker_timer.start()
 
 
 func _process(delta: float) -> void:
@@ -24,3 +26,7 @@ func spawn_asteroids() -> void:
 		var distance: float = randf_range(spawn_radius_range.x, spawn_radius_range.y)
 		add_child(asteroid)
 		asteroid.setup_orbit(black_hole.position, distance, angle)
+
+
+func _on_clicker_timer_timeout() -> void:
+	print("attack")
