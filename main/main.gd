@@ -29,6 +29,8 @@ func spawn_asteroids() -> void:
 
 
 func _on_clicker_timer_timeout() -> void:
+	clicker.play_hit_animation()
+	
 	var overlapping_areas: Array[Area2D] = clicker.get_overlapping_areas()
 	for area: Area2D in overlapping_areas:
 		if area is Asteroid:
