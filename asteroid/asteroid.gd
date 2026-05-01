@@ -73,7 +73,7 @@ func make_polygon_points() -> PackedVector2Array:
 	var point_count: int = randi_range(POINT_COUNT_RANGE.x, POINT_COUNT_RANGE.y)
 	var points: PackedVector2Array = PackedVector2Array()
 
-	for i in point_count:
+	for i: int in point_count:
 		var angle: float = TAU * float(i) / float(point_count)
 		var radius_ratio: float = randf_range(RADIUS_RATIO_RANGE.x, RADIUS_RATIO_RANGE.y)
 		var new_radius: float = radius * radius_ratio

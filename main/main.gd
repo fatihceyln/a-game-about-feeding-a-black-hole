@@ -1,8 +1,8 @@
 extends Node2D
 class_name Main
 
-const ASTEROID = preload("uid://db1ixbef0ki6")
-const ASTEROID_GROUP := &"asteroids"
+const ASTEROID: PackedScene = preload("uid://db1ixbef0ki6")
+const ASTEROID_GROUP: StringName = &"asteroids"
 
 @export var asteroid_count: int = 35
 @export var spawn_radius_range: Vector2 = Vector2(160, 600)
@@ -29,12 +29,12 @@ func _process(delta: float) -> void:
 
 
 func clear_asteroids() -> void:
-	for node in get_tree().get_nodes_in_group(ASTEROID_GROUP):
+	for node: Node in get_tree().get_nodes_in_group(ASTEROID_GROUP):
 		node.free()
 
 
 func spawn_asteroids() -> void:
-	for i in asteroid_count:
+	for i: int in asteroid_count:
 		var asteroid: Asteroid = ASTEROID.instantiate()
 		var angle: float = TAU * float(i) / asteroid_count
 		var distance: float = randf_range(spawn_radius_range.x, spawn_radius_range.y)
@@ -46,7 +46,7 @@ func _on_clicker_timer_timeout() -> void:
 	clicker.play_hit_animation()
 
 	var overlapping_areas: Array[Area2D] = clicker.get_overlapping_areas()
-	for area in overlapping_areas:
+	for area: Area2D in overlapping_areas:
 		if area is Asteroid:
 			(area as Asteroid).take_damage()
 

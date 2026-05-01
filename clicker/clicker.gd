@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	var segment_size: float = TAU / SEGMENT_COUNT
 
-	for i in SEGMENT_COUNT:
+	for i: int in SEGMENT_COUNT:
 		var start_angle: float = angle_offset + (float(i) * segment_size)
 		var end_angle: float = start_angle + (segment_size * SEGMENT_RATIO)
 		draw_arc(Vector2.ZERO, RADIUS, start_angle, end_angle, 20, Color.BLACK, 6)		

@@ -17,7 +17,7 @@ var initial_angles: Dictionary[int, float] = {}
 
 
 func _ready() -> void:
-	for i in RING_COUNT:
+	for i: int in RING_COUNT:
 		initial_angles[i] = randf_range(0, TAU)
 
 
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, RADIUS, COLOR)
 
-	for i in RING_COUNT:
+	for i: int in RING_COUNT:
 		var color: Color = RING_COLOR
 		color.a = 1.0 - (i * 0.2)
 		var angle_offset: float = initial_angles[i]
