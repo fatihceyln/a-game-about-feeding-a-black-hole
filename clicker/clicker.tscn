@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://7rf5hj5a8wfb"]
+
+[ext_resource type="Script" uid="uid://bkmig4l2lehhe" path="res://clicker/clicker.gd" id="1_4ioso"]
+
+[node name="Clicker" type="Area2D" unique_id=2077072518]
+script = ExtResource("1_4ioso")
