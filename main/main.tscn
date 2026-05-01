@@ -4,6 +4,13 @@
 [ext_resource type="Script" uid="uid://cwxad1s7m51uf" path="res://main/main.gd" id="2_main"]
 [ext_resource type="PackedScene" uid="uid://7rf5hj5a8wfb" path="res://clicker/clicker.tscn" id="3_xwkvk"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwkvk"]
+bg_color = Color(0.67687863, 0.6768787, 0.6768785, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [node name="Main" type="Node2D" unique_id=1174812453]
 script = ExtResource("2_main")
 
@@ -26,4 +33,74 @@ z_index = 10
 [node name="ClickerTimer" type="Timer" parent="." unique_id=1428310496]
 wait_time = 0.5
 
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1178480091]
+
+[node name="StartMenu" type="Control" parent="HUD" unique_id=1057443238]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/StartMenu" unique_id=1102602528]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/StartMenu" unique_id=140020223]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.5
+offset_top = -90.5
+offset_right = 303.5
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HUD/StartMenu/MarginContainer" unique_id=1454210691]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xwkvk")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/StartMenu/MarginContainer" unique_id=1366710724]
+layout_mode = 2
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 34
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/StartMenu/MarginContainer/MarginContainer" unique_id=356116280]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer" unique_id=460772711]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=1897030434]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Feed the Black Hole"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=769728149]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Asteroids are so bad"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer" unique_id=1725022607]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
 [connection signal="timeout" from="ClickerTimer" to="." method="_on_clicker_timer_timeout"]
+[connection signal="pressed" from="HUD/StartMenu/MarginContainer/MarginContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

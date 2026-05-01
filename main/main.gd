@@ -9,11 +9,7 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 @onready var black_hole: BlackHole = $BlackHole
 @onready var clicker: Clicker = $Clicker
 @onready var clicker_timer: Timer = $ClickerTimer
-
-
-func _ready() -> void:
-	spawn_asteroids()
-	clicker_timer.start()
+@onready var start_menu: Control = %StartMenu
 
 
 func _process(delta: float) -> void:
@@ -36,3 +32,9 @@ func _on_clicker_timer_timeout() -> void:
 	for area in overlapping_areas:
 		if area is Asteroid:
 			(area as Asteroid).take_damage()
+
+
+func _on_start_button_pressed() -> void:
+	start_menu.visible = false
+	spawn_asteroids()
+	clicker_timer.start()
