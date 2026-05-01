@@ -8,6 +8,11 @@ const ROTATION_SPEED: float = 0.6
 
 var angle_offset: float = 0
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+func _ready() -> void:
+	var circle: CircleShape2D = collision_shape.shape as CircleShape2D
+	circle.radius = RADIUS
 
 func _process(delta: float) -> void:
 	angle_offset = wrapf(angle_offset + (ROTATION_SPEED * delta), 0, TAU)
