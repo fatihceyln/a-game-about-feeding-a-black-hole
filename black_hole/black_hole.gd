@@ -15,6 +15,7 @@ const RING_SPEED_STEP: float = 0.2
 var passed_time: float = 0
 var initial_angles: Dictionary[int, float] = {}
 
+
 func _ready() -> void:
 	for i: int in RING_COUNT:
 		initial_angles[i] = randf_range(0, TAU)
