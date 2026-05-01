@@ -5,6 +5,7 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 
 @export var asteroid_count: int = 35
 @export var spawn_radius_range: Vector2 = Vector2(160, 600)
+@export var session_duration: float = 20
 
 @onready var black_hole: BlackHole = $BlackHole
 @onready var clicker: Clicker = $Clicker
@@ -12,7 +13,9 @@ const ASTEROID = preload("uid://db1ixbef0ki6")
 @onready var start_menu: Control = %StartMenu
 @onready var timer_container: HBoxContainer = %TimerContainer
 @onready var timer_label: Label = %TimerLabel
+@onready var session_timer: Timer = $SessionTimer
 
+var session_time: float = 0
 
 func _ready() -> void:
 	timer_container.visible = false
@@ -45,3 +48,16 @@ func _on_start_button_pressed() -> void:
 	timer_container.visible = true
 	spawn_asteroids()
 	clicker_timer.start()
+	
+	session_time = session_duration
+	session_timer.start()
+
+
+func _on_session_timer_timeout() -> void:
+	session_time -= session_timer.wait_time
+	timer_label.text = "%.1f" % session_time
+	if session_time <= 0:
+		print("Game over")
+		session_timer.stop()
+		clicker_timer.stop()
+	
