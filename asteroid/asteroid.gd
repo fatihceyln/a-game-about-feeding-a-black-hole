@@ -1,6 +1,8 @@
 extends Area2D
 class_name Asteroid
 
+signal destroyed
+
 const BASE_COLOR: Color = Color(0.654, 0.397, 0.413, 1.0)
 const FILL_COLOR: Color = Color(0.796, 0.490, 0.511, 1.0)
 const POINT_COUNT_RANGE: Vector2i = Vector2i(7, 11)
@@ -85,6 +87,7 @@ func take_damage() -> void:
 	health -= 1
 	fill_material.set_shader_parameter("progress", 1 - (float(health) / float(MAX_HEALTH)))
 	if health <= 0:
+		destroyed.emit()
 		queue_free()
 	else:
 		play_hit_animation()
