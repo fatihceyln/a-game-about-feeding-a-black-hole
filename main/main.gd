@@ -2,6 +2,8 @@ extends Node2D
 class_name Main
 
 const ASTEROID: PackedScene = preload("uid://db1ixbef0ki6")
+const HIT_MISS_SOUND: AudioStream = preload("uid://bw6vfgu5be3o7")
+const POP_SOUND: AudioStream = preload("uid://xsbiemdjqeah")
 
 @export var asteroid_count: int = 35
 @export var spawn_radius_range: Vector2 = Vector2(160, 600)
@@ -15,10 +17,11 @@ const ASTEROID: PackedScene = preload("uid://db1ixbef0ki6")
 @onready var game_over_screen: Control = %GameOverScreen
 @onready var timer_label: Label = %TimerLabel
 @onready var kill_count_label: Label = %KillCountLabel
-
+@onready var audio_player: AudioStreamPlayer = $AudioPlayer
 
 var session_time: float = 0
 var kill_count: int = 0
+
 
 func _process(delta: float) -> void:
 	clicker.global_position = get_global_mouse_position()
@@ -38,9 +41,13 @@ func _on_clicker_timer_timeout() -> void:
 	clicker.play_hit_animation()
 	
 	var overlapping_areas: Array[Area2D] = clicker.get_overlapping_areas()
-	for area: Area2D in overlapping_areas:
-		if area is Asteroid:
-			(area as Asteroid).take_damage()
+	if overlapping_areas.is_empty():
+		audio_player.stream = HIT_MISS_SOUND
+		audio_player.play()
+	else:
+		for area: Area2D in overlapping_areas:
+			if area is Asteroid:
+				(area as Asteroid).take_damage()
 
 
 func _on_start_button_pressed() -> void:
@@ -83,3 +90,5 @@ func start_session() -> void:
 func on_asteroid_destroyed() -> void:
 	kill_count += 1
 	kill_count_label.text = "You killed %d asteroids" % kill_count
+	audio_player.stream = POP_SOUND
+	audio_player.play()
