@@ -23,6 +23,7 @@ const MAX_HEALTH: int = 3
 @onready var fill_shape: Polygon2D = $FillShape
 @onready var outline: Line2D = $Outline
 @onready var collision_polygon: CollisionPolygon2D = $CollisionPolygon2D
+@onready var audio_player: AudioStreamPlayer = $AudioPlayer
 
 var health: int = MAX_HEALTH
 
@@ -107,9 +108,8 @@ func take_damage() -> void:
 		destroyed.emit()
 		is_destroyed = true
 		play_asteroid_destroy_particles()
-		
-		
 	else:
+		audio_player.play()
 		play_hit_animation()
 
 
