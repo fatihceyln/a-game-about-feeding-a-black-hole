@@ -34,6 +34,10 @@ var min_y: float = 0
 var max_y: float = 0
 
 var rotation_speed: float = randf_range(ROTATION_SPEED_RANGE.x, ROTATION_SPEED_RANGE.y)
+var is_destroyed: bool = false
+var fall_speed: float = 600
+var orbit_acceleration: float = 2
+
 
 func _ready() -> void:
 	var points: PackedVector2Array = make_polygon_points()
@@ -58,7 +62,18 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	orbit_angle += orbit_speed * delta
+	if is_destroyed:
+		orbit_angle += (orbit_speed + orbit_acceleration) * delta
+		orbit_radius = maxf(orbit_radius - (fall_speed * delta), 0)
+		fall_speed += fall_speed * delta
+
+		scale = scale.move_toward(Vector2.ZERO, 0.5 * delta)
+
+		if position.is_equal_approx(orbit_center):
+			queue_free()
+	else:
+		orbit_angle += orbit_speed * delta
+		
 	position = orbit_center + Vector2.RIGHT.rotated(orbit_angle) * orbit_radius
 	rotation = wrapf(rotation + (delta * rotation_speed), 0, TAU)
 
@@ -88,7 +103,7 @@ func take_damage() -> void:
 	fill_material.set_shader_parameter("progress", 1 - (float(health) / float(MAX_HEALTH)))
 	if health <= 0:
 		destroyed.emit()
-		queue_free()
+		is_destroyed = true
 	else:
 		play_hit_animation()
 

@@ -13,7 +13,6 @@ corner_radius_bottom_left = 16
 
 [node name="Main" type="Node2D" unique_id=1692932168]
 script = ExtResource("1_x58q2")
-session_duration = 5.0
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=501768433]
 layer = -1
